@@ -1,16 +1,25 @@
 #include <ChuckPlex.h>
 
-int pins[] = {3,5,6,9};
+int pins[] = {3,5,6,9}; // PWM pins
+int nodes = 10;
 ChuckPlex plex = ChuckPlex(pins, 4);
 void setup(){
-  // no setup
+  // print the connections to make
+  Serial.begin(9600);
+  delay(3000);
+  plex.displayConnections(nodes);
 }
 void loop(){
   // choose a node at random
-  int node = random(10);
-  // turn it on and fade it out using PWM
-  for(int i=255; i>0; i--){
-    plex.write(node, i);
-    delay(2);
+  for(int node=1; node<=nodes; node++){
+    // fade on, then off using PWM
+    for(int i=1; i<=16; i++){
+      plex.write(node, i*i-1); // makes a nicer fade than linear
+      delay(25);
+    }
+    for(int i=16; i>=1; i--){
+      plex.write(node, i*i-1);
+      delay(25);
+    }
   }
 }
