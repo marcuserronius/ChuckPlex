@@ -23,14 +23,14 @@ To get the wiring information, create a simple sketch that looks like this:
       plex.displayConnections(nodes);
     }
 
-If you didn't calculate the required pins yourself, you can let ChuckPlex do it by changing it to this:
+If you didn't calculate the required pins yourself, you can let ChuckPlex do it by changing the code here:
 
     void setup(){
       int pins[] = {2,3}; // the pins you'll be using
       int pinCount = 2;
       int nodes = 10;
 
-Since this is clearly not enough pins (it's only enough for 2 nodes!), you will get a message over the serial connection informing you that it's not enough, and telling you how many will be required. Once you have the correct number of pins included, though, you will get a message like this:
+Since this is clearly not enough pins (2 pins are only enough for 2 nodes!), you will get a message over the serial connection informing you that it's not enough, and telling you how many will be required. Once you have the correct number of pins included, though, you will get a message like this:
 
     Pin 2: 1+ 2+ 3+ 4- 7- 10- 
     Pin 3: 4+ 5+ 6+ 1- 8- 
