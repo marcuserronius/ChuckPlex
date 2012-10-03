@@ -61,3 +61,41 @@ After all connections have been made, just load up the library and use it to con
     }
 
 That's it!
+
+## Reference
+
+Here's a little more detailed reference for this class.
+
+### `ChuckPlex(int * pins, int pinCount)`
+
+Creates an instance of the class. `pins` is an array of output pin numbers, and `pincount` is the number of output pins.
+
+### `void enable(int node)`
+
+Turns on the numbered `node`. Note that nodes indices start at one, not zero. This is the primary function you will use for just turning nodes on. `enable()` will call `clear()` to turn off all currently powered nodes before it turns this one on.
+
+### `void clear()`
+
+Turns off all nodes. Use this when you don't want anything powered.
+
+### `void write(int node, int value)`
+
+If you used PWM pins for your output pins, you can use `write()` to control the node as if it was connected directly to a PWM pin. `node` is the node you want to control, and `value` is in the range (0..255), just like `analogWrite()`. You only want to use this method if you used PWM pins, though. Otherwise, just stick to `enable()` and `clear()`.
+
+### `void displayConnections(int nodeCount)`
+
+This is the method to call when you are first setting up the array. Note that using it in your sketch greatly increases the size of the compiled sketch; so once you have gotten your information, you'll want to remove the reference to it.
+
+This method will print to the serial connection the list of connections that must be made for the particular charlieplexed matrix you are setting up. If you didn't initialize the object with enough pins in the call to `ChuckPlex()`, it will print out a message telling you how many pins you need.
+
+If you have the correct number of pins, it will print out a list of connections. Each line will start with the output pin number, then a series of node numbers, with positive and negative values. These correspond to the positive and negative leads of each node. Connect all these wires to the given output pin number, using appropriate resistors. If all your nodes can be supplied with the same voltage, simply use one resistor on each pin, of half the required resistance (since there will be a resistor at each end of the connection).
+
+## Bugs, suggestions, and feedback
+
+Please report any bugs to the GitHub issues page:
+https://github.com/marcuserronius/ChuckPlex/issues
+
+or report bugs, or post general feedback to this forum thread:
+http://arduino.cc/forum/index.php/topic,124481.0.html
+
+Thank you!

@@ -3,7 +3,9 @@
 
 // Set up a ChuckPlex instance
 ChuckPlex::ChuckPlex(int * pins, int pinCount){
-  this->pins = pins;
+  int pinsTemp[pinCount];
+  memcpy(pinsTemp, pins, sizeof(int)*pinCount);
+  this->pins = pinsTemp;
   this->pinCount = pinCount;
   this->maxNodes = pinCount*(pinCount-1);
 }
